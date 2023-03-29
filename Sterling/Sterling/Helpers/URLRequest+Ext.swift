@@ -18,7 +18,7 @@ extension URLRequest {
 
     var method: HTTPMethod? {
         get {
-            guard let httpMethod = self.httpMethod else { return nil }
+            guard let httpMethod else { return nil }
             let method = HTTPMethod(rawValue: httpMethod)
             return method
         }
