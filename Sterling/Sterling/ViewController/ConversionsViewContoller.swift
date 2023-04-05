@@ -26,7 +26,7 @@ class ConversionsViewContoller: UICollectionViewController {
         let currencyCodes = conversionRates.map { $0.key }
         let cellRegistration = UICollectionView.CellRegistration { (cell: UICollectionViewListCell, indexPath: IndexPath, itemIdentifier: String) in
             var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.text = "currencyCodes[indexPath.row]"
+            contentConfiguration.text = currencyCodes[indexPath.row]
             cell.contentConfiguration = contentConfiguration
         }
 
