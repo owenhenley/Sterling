@@ -9,7 +9,7 @@ import Foundation
 
 enum FetchError: Error {
     case invalidURL
-    case invalidCurrency
+    case invalidCurrencyDecoding
     case invalidServerResponse
     case failed(Error)
 }

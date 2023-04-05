@@ -7,26 +7,31 @@
 
 import Foundation
 
-struct Currency: Decodable {
-    let result: String
-    let documentation: String
-    let termsOfUse: String
-    let timeLastUpdateUnix: TimeInterval
+struct Currency: Decodable, Hashable {
     let timeLastUpdateUTC: String
-    let timeNextUpdateUnix: TimeInterval
     let timeNextUpdateUTC: String
     let baseCode: String
     let conversionRates: [String: Double]
 
     enum CodingKeys: String, CodingKey {
-        case result
-        case documentation
-        case termsOfUse = "terms_of_use"
-        case timeLastUpdateUnix = "time_last_update_unix"
         case timeLastUpdateUTC = "time_last_update_utc"
-        case timeNextUpdateUnix = "time_next_update_unix"
         case timeNextUpdateUTC = "time_next_update_utc"
         case baseCode = "base_code"
         case conversionRates = "conversion_rates"
     }
 }
+
+#if DEBUG
+extension Currency {
+    static var sampleData = [
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["GBP": 1.0]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["USD": 0.9]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["ABC": 1.1]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["XYZ": 1.6]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["N/A": 1.5]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["RPE": 3.2]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["YEN": 1.8]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["CHZ": 2.7])
+    ]
+}
+#endif
