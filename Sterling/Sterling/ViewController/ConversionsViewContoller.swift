@@ -9,54 +9,67 @@ import UIKit
 
 class ConversionsViewContoller: UICollectionViewController {
 
+    var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
+
     private var fetchData = FetchData()
-    private var conversionRates = [String: Double]()
+    private var currency: Currency?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getConversionRates(for: .gbp)
-        setupCollectionView()
-    }
-
-    // MARK: - Setup CollectionView
-
-    private func setupCollectionView() {
-        collectionView.collectionViewLayout = layout()
-
-        let currencyCodes = conversionRates.map { $0.key }
-        let cellRegistration = UICollectionView.CellRegistration { (cell: UICollectionViewListCell, indexPath: IndexPath, itemIdentifier: String) in
-            var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.text = currencyCodes[indexPath.row]
-            cell.contentConfiguration = contentConfiguration
-        }
-
-        let dataSource = UICollectionViewDiffableDataSource<Int, String>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: String) in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        }
-
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(currencyCodes)
-        dataSource.apply(snapshot)
-    }
-
-    private func layout() -> UICollectionViewCompositionalLayout {
+    private var layout: UICollectionViewCompositionalLayout {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
         listConfiguration.showsSeparators = false
         listConfiguration.backgroundColor = .clear
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
 
-    // MARK: - Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getCurrencyData(for: .gbp)
+    }
 
-    private func getConversionRates(for currency: CurrencyCode = CurrencyCode.gbp) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.collectionViewLayout = layout
+        setupDataSource()
+    }
+
+    // MARK: Methods
+
+    private func getCurrencyData(for currency: CurrencyCode = CurrencyCode.gbp) {
         Task {
             do {
-                conversionRates = try await fetchData.latestCurrencyData(for: currency).conversionRates
-                print(conversionRates)
+                self.currency = try await fetchData.latestCurrencyData(for: currency)
+                print(self.currency!)
             } catch {
                 print(FetchError.failed(error))
             }
         }
+    }
+}
+
+// MARK: - DataSource
+
+extension ConversionsViewContoller {
+    enum Section {
+        case main
+    }
+
+    private func setupDataSource() {
+//        guard let currency else { return }
+
+//        let currencyCodes = currency.conversionRates.map { $0.key }
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Int> { cell, indexPath, item in
+            var contentConfiguration = cell.defaultContentConfiguration()
+            contentConfiguration.text = "\(item)"//currencyCodes[indexPath.row]
+            cell.contentConfiguration = contentConfiguration
+        }
+
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+        }
+
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(Array(0...100))
+        dataSource.apply(snapshot)
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class ConversionRateCell: UICollectionViewListCell {
 
-    @IBOutlet var currencyLabel: UILabel! = {
+    @IBOutlet weak var currencyLabel: UILabel! = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = UIColor.black
@@ -19,7 +19,7 @@ class ConversionRateCell: UICollectionViewListCell {
     }()
 
 
-    @IBOutlet var conversionRateLabel: UILabel! = {
+    @IBOutlet weak var conversionRateLabel: UILabel! = {
         let label = UILabel()
         label.textColor = UIColor.black
         label.font = UIFont.systemFont(ofSize: 14)
@@ -28,7 +28,7 @@ class ConversionRateCell: UICollectionViewListCell {
         return label
     }()
 
-    @IBOutlet var stackView: UIStackView! = {
+    @IBOutlet weak var stackView: UIStackView! = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kqg-M4-dUM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="evG-de-iAk">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,38 +10,38 @@
     </dependencies>
     <scenes>
         <!--Conversions View Contoller-->
-        <scene sceneID="BEY-cz-hAG">
+        <scene sceneID="Syi-ty-xZE">
             <objects>
-                <collectionViewController id="kqg-M4-dUM" customClass="ConversionsViewContoller" customModule="Sterling" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Kau-FA-GrK">
+                <collectionViewController id="evG-de-iAk" customClass="ConversionsViewContoller" customModule="Sterling" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="08Y-tF-DS8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kQf-YS-nxM">
-                            <size key="itemSize" width="393" height="105"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="CP0-NS-FCr">
+                            <size key="itemSize" width="393" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="conversionCell" id="lRA-mF-8TI">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="105"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="conversionCell" id="gaU-Fv-jq2">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="w3T-8H-H6F">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="105"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SRZ-Kd-pfm">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="276" translatesAutoresizingMaskIntoConstraints="NO" id="yuo-sA-KuK">
-                                            <rect key="frame" x="18" y="42" width="358.66666666666669" height="20.333333333333329"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PJS-5b-yJQ">
+                                            <rect key="frame" x="37" y="8.9999999999999982" width="48.666666666666657" height="20.333333333333329"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Q1-QL-PXY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gbp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kj-CE-6Jx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="30" height="20.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IaG-bg-YRJ">
-                                                    <rect key="frame" x="317.33333333333331" y="0.0" width="41.333333333333314" height="20.333333333333332"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXP-uu-KHX">
+                                                    <rect key="frame" x="30" y="0.0" width="18.666666666666671" height="20.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -50,23 +50,23 @@
                                         </stackView>
                                     </subviews>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="393" height="105"/>
+                                <size key="customSize" width="393" height="128"/>
                                 <connections>
-                                    <outlet property="conversionRateLabel" destination="IaG-bg-YRJ" id="xKi-3l-mQp"/>
-                                    <outlet property="currencyLabel" destination="6Q1-QL-PXY" id="00l-F5-cuy"/>
-                                    <outlet property="stackView" destination="yuo-sA-KuK" id="YqL-g6-UG0"/>
+                                    <outlet property="conversionRateLabel" destination="AXP-uu-KHX" id="ZKy-yE-Maz"/>
+                                    <outlet property="currencyLabel" destination="3Kj-CE-6Jx" id="leE-3n-ZcL"/>
+                                    <outlet property="stackView" destination="PJS-5b-yJQ" id="MPi-bQ-hyJ"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="kqg-M4-dUM" id="9eE-gS-nF8"/>
-                            <outlet property="delegate" destination="kqg-M4-dUM" id="Ors-hh-Cab"/>
+                            <outlet property="dataSource" destination="evG-de-iAk" id="bnb-cO-WYd"/>
+                            <outlet property="delegate" destination="evG-de-iAk" id="Tde-Gu-n88"/>
                         </connections>
                     </collectionView>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="M2z-hI-GPn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mct-of-4P9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-40.458015267175568" y="-31.690140845070424"/>
+            <point key="canvasLocation" x="-219.08396946564883" y="-36.619718309859159"/>
         </scene>
     </scenes>
     <resources>
