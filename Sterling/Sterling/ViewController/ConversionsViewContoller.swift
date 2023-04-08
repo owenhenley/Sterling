@@ -23,13 +23,14 @@ class ConversionsViewContoller: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCurrencyData(for: .gbp)
+        navigationItem.title = "List"
+        setupDataSource()
+        collectionView.collectionViewLayout = layout
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.collectionViewLayout = layout
-        setupDataSource()
+//        getCurrencyData(for: .gbp)
     }
 
     // MARK: Methods
@@ -37,13 +38,23 @@ class ConversionsViewContoller: UICollectionViewController {
     private func getCurrencyData(for currency: CurrencyCode = CurrencyCode.gbp) {
         Task {
             do {
-                self.currency = try await fetchData.latestCurrencyData(for: currency)
+                let latestData = try await fetchData.latestCurrencyData(for: currency)
+                self.currency = latestData
+//                updateSnapshot(with: latestData)
                 print(self.currency!)
             } catch {
                 print(FetchError.failed(error))
             }
         }
     }
+
+//    private func updateSnapshot(with currency: Currency) {
+//        guard let dataSource else { return }
+//        var snapshot = NSDiffableDataSourceSnapshot<Section, Currency>()
+//        snapshot.appendSections([.main])
+//        snapshot.appendItems([currency])
+//        dataSource.apply(snapshot)
+//    }
 }
 
 // MARK: - DataSource
@@ -57,19 +68,19 @@ extension ConversionsViewContoller {
 //        guard let currency else { return }
 
 //        let currencyCodes = currency.conversionRates.map { $0.key }
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Int> { cell, indexPath, item in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Int> { cell, indexPath, currency in
             var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.text = "\(item)"//currencyCodes[indexPath.row]
+            contentConfiguration.text = "\(currency)"
             cell.contentConfiguration = contentConfiguration
         }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, currency: Int) -> UICollectionViewCell? in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: currency)
         }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Array(0...100))
+        snapshot.appendItems(Array(0..<94))
         dataSource.apply(snapshot)
     }
 }

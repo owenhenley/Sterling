@@ -35,3 +35,12 @@ extension Currency {
     ]
 }
 #endif
+
+struct Item: Hashable {
+    let currency: Currency
+    private let identifier = UUID()
+
+    internal init(currency: Currency) {
+        self.currency = currency
+    }
+}
