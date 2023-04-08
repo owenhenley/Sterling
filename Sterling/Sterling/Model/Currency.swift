@@ -37,10 +37,17 @@ extension Currency {
 #endif
 
 struct Item: Hashable {
-    let currency: Currency
+
+    private var currency: Currency
+    let lastUpdate: String
+    let conversionRate: String
+    let conversionRateCountryCode: String
     private let identifier = UUID()
 
-    internal init(currency: Currency) {
+    init(currency: Currency, lastUpdate: String = "", conversionRate: String = "", conversionRateCountryCode: String = "") {
         self.currency = currency
+        self.lastUpdate = currency.timeLastUpdateUTC
+        self.conversionRate = currency.conversionRates.values.description
+        self.conversionRateCountryCode = currency.conversionRates.keys.formatted()
     }
 }
