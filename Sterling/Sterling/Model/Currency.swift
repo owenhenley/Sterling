@@ -11,7 +11,7 @@ struct Currency: Decodable, Hashable {
     let timeLastUpdateUTC: String
     let timeNextUpdateUTC: String
     let baseCode: String
-    let conversionRates: [String: Double]
+    let conversionRates: [ConversionRate]
 
     enum CodingKeys: String, CodingKey {
         case timeLastUpdateUTC = "time_last_update_utc"
@@ -21,17 +21,22 @@ struct Currency: Decodable, Hashable {
     }
 }
 
+struct ConversionRate: Decodable, Hashable {
+    var currencyCode: String
+    var conversionRate: Double
+}
+
 #if DEBUG
 extension Currency {
     static var sampleData = [
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["GBP": 1.0]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["USD": 0.9]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["ABC": 1.1]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["XYZ": 1.6]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["N/A": 1.5]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["RPE": 3.2]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["YEN": 1.8]),
-        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: ["CHZ": 2.7])
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "GBP", conversionRate: 1.0)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "USD", conversionRate: 0.9)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "ABC", conversionRate: 1.1)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "XYZ", conversionRate: 1.6)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "N/A", conversionRate: 1.5)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "RPE", conversionRate: 3.2)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "YEN", conversionRate: 1.8)]),
+        Currency(timeLastUpdateUTC: "", timeNextUpdateUTC: "", baseCode: "GBP", conversionRates: [ConversionRate(currencyCode: "CHZ", conversionRate: 2.7)])
     ]
 }
 #endif
