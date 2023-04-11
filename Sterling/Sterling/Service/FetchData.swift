@@ -23,10 +23,12 @@ struct FetchData {
         guard var url = URL(string: baseURL) else { throw FetchError.invalidURL }
         url.appendPathComponent(apiKey)
         url.appendPathComponent("latest/\(currencyCode)")
+
         let request = URLRequest(url: url)
         let (data, response) = try await session.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else { throw FetchError.invalidServerResponse }
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw FetchError.invalidServerResponse
+        }
 
         do {
             let currency = try JSONDecoder().decode(Currency.self, from: data)

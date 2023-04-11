@@ -1,11 +1,27 @@
+//
+//  CurrenciesViewModel.swift
+//  Sterling
+//
+//  Created by Owen Henley on 28/03/2023.
+//
+
 import Combine
 
 class CurrenciesViewModel {
 
-    @Published var currency: Currency? = nil
-    @Published var conversionRates: [ConversionRate] = []
+    var currency: Currency?
+    var conversionRates: [ConversionRate]
 
     private var fetchData = FetchData()
+
+    init(currency: Currency? = nil, conversionRates: [ConversionRate] = []) {
+        self.currency = currency
+        self.conversionRates = conversionRates
+    }
+
+    func updateUI(_:() -> Void) {
+        getCurrencyData()
+    }
 
     private func getCurrencyData(for currency: CurrencyCode = CurrencyCode.gbp) {
         Task {

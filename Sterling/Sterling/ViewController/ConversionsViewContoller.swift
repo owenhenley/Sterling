@@ -10,9 +10,8 @@ import UIKit
 class ConversionsViewContoller: UICollectionViewController {
 
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>! = nil
+    var currencyViewModel = CurrenciesViewModel()
 
-    private var fetchData = FetchData()
-    private var currency: Currency?
 
     private var layout: UICollectionViewCompositionalLayout {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
@@ -26,25 +25,16 @@ class ConversionsViewContoller: UICollectionViewController {
         navigationItem.title = "List"
         setupDataSource()
         collectionView.collectionViewLayout = layout
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getCurrencyData(for: .gbp)
+        bindViewModel()
     }
 
     // MARK: Methods
 
-    private func getCurrencyData(for currency: CurrencyCode = CurrencyCode.gbp) {
-        Task {
-            do {
-                let latestData = try await fetchData.latestCurrencyData(for: currency)
-                self.currency = latestData
-                updateSnapshot(with: latestData)
-                print(self.currency!)
-            } catch {
-                print(FetchError.failed(error))
-            }
+    func bindViewModel() {
+        currencyViewModel.updateUI { [weak self] in
+            guard let self else { return }
+            guard let currency = currencyViewModel.currency else { return }
+            updateSnapshot(with: currency)
         }
     }
 
@@ -65,19 +55,19 @@ extension ConversionsViewContoller {
     }
 
     private func setupDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
-            var contentConfiguration = cell.defaultContentConfiguration()
-            contentConfiguration.text = item.conversionRateCountryCode
-            cell.contentConfiguration = contentConfiguration
-        }
+//        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { cell, indexPath, item in
+//            var contentConfiguration = cell.defaultContentConfiguration()
+//            contentConfiguration.text = item.conversionRateCountryCode
+//            cell.contentConfiguration = contentConfiguration
+//        }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, currency: Item) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: currency)
-        }
-
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.main])
-//        snapshot.appendItems(
-        dataSource.apply(snapshot)
+//        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { (collectionView: UICollectionView, indexPath: IndexPath, currency: Item) -> UICollectionViewCell? in
+//            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: currency)
+//        }
+//
+//        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+//        snapshot.appendSections([.main])
+////        snapshot.appendItems(
+//        dataSource.apply(snapshot)
     }
 }
